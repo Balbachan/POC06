@@ -1,3 +1,5 @@
+https://codesandbox.io/p/github/Balbachan/POC06/main?workspaceId=62ab7042-b701-4895-a6cd-a6d9bc371a05
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
