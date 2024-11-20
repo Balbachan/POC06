@@ -1,95 +1,154 @@
-import Image from "next/image";
+"use client";
 import styles from "./page.module.css";
+import { useState, useEffect } from "react";
+import data from "./data/dados.json";
+import Seat from "./components/seat";
 
-export default function Home() {
+export function MovieInfo({ titulo, sinopse, direcao, horario, preco }) {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.js</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+    <div>
+      <h2>{titulo}</h2>
+      <p>
+        <strong>Horário:</strong> {horario}
+      </p>
+      <p>
+        <strong>Direção:</strong> {direcao}
+      </p>
+      <p>{sinopse}</p>
+      <p>
+        <strong>Preço:</strong> R$ {preco.toFixed(2)}
+      </p>
     </div>
   );
 }
+
+export default function Home() {
+  const [selectedSeats, setSelectedSeats] = useState([]);
+
+  const OrganizarSelectSeat = (numero) => {
+    setSelectedSeats(
+      (prev) =>
+        prev.includes(numero)
+          ? prev.filter((n) => n !== numero)
+          : [...prev, numero]
+
+      //Quando o usuário clica em um assento:Se já está selecionado, o código remove o assento da lista. Se não, o código adiciona o assento à lista.
+      /*  numero: número do assento que o usuário acabou de clicar.
+       * setSelectedSeats: a função que altera o estado de selectedSeats, fornecida pelo React através do useState.
+       * prev: valor atual de selectedSeats (lista de assentos que já estão selecionados).*/
+    );
+  };
+
+  return (
+    <main className={styles.container}>
+      <div className={styles.movieInfo}>
+        <MovieInfo
+          {...data} /*spread passa as propriedades do objeto data para o componente*/
+        />
+      </div>
+
+      <div className={styles.seatingChart}>
+        {data.assentos.map((seat) => (
+          <Seat
+            key={seat.numero}
+            {...seat}
+            onClick={OrganizarSelectSeat}
+            selected={selectedSeats.includes(seat.numero)} // Passa a informação se o assento está selecionado
+          />
+        ))}
+      </div>
+
+      <div className={styles.extraRow}>
+        {data.assentos.slice(56, 59).map((seat) => (
+          <Seat
+            key={seat.numero}
+            {...seat}
+            onClick={OrganizarSelectSeat}
+            selected={selectedSeats.includes(seat.numero)}
+          />
+        ))}
+      </div>
+
+      <div className={styles.tela}>Tela</div>
+
+      <div className={styles.legenda}>
+        <div className={styles.legendaItem}>
+          <div
+            className={`${styles.legendaCirculo}`}
+            style={{ backgroundColor: "#bababa" }} // Cor para disponível
+          ></div>
+          <span>Disponível</span>
+        </div>
+        <div className={styles.legendaItem}>
+          <div
+            className={`${styles.legendaCirculo}`}
+            style={{ backgroundColor: "#1a1a2a" }} // Cor para indisponível
+          ></div>
+          <p>Indisponível</p>
+        </div>
+        <div className={styles.legendaItem}>
+          <div
+            className={`${styles.legendaCirculo}`}
+            style={{ backgroundColor: "#db3d2e" }} // Cor para selecionado
+          ></div>
+          <p>Selecionado</p>
+        </div>
+      </div>
+      <button className={styles.buyButton}>
+        Comprar ({selectedSeats.length} assentos)
+      </button>
+    </main>
+  );
+}
+/*"use client";
+import styles from "./page.module.css";
+//import Header from "./components/header.js";
+import { useEffect, useState } from "react";
+const dados = require("./dados.json");
+
+export default function Home() {
+  const [dados, setDados] = useState(null);
+  useEffect(() => {
+    fetch("/dados2.json")
+      .then((response) => {
+        if (reponse.ok) {
+          throw new error("Não foi possível ler os dados");
+        }
+        return reponse.json();
+      })
+      .then((jsonData) => setDados(jsonData))
+      .catch((err) => setDados);
+  });
+
+  if (dados === null) {
+    return (
+      <main>
+        <Header title="Carregando..." />
+      </main>
+    );
+  }
+
+  if (dados.error) {
+    return (
+      <main>
+        <Header title={dados.error} />
+      </main>
+    );
+  }
+
+  return (
+    <main className={styles.main}>
+      <h1>{dados.titulo}</h1>
+      <p>{dados.sinopse}</p>
+
+      <ol>
+        {dados.assentos.map((assento) => (
+          <li key={assento.numero}>
+            Assento {assento.numero} está disponivel?
+            {assento.disponivel ? "sim" : "não"}
+          </li>
+        ))}
+      </ol>
+    </main>
+  );
+}*/
