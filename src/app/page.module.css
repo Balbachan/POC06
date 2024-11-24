@@ -64,7 +64,7 @@
 .tela {
   width: 80%;
   height: 20px;
-  background-color: var(--background-color);
+  background-color: var(--available);
   border-radius: 10px;
   margin: 20px auto;
   text-align: center;
