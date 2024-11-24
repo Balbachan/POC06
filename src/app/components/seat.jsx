@@ -8,7 +8,7 @@ export default function Seat({ numero, disponivel, onClick, selected }) {
       } ${selected ? styles.selected : ""}`} // Adiciona a classe "selected" se estiver selecionado
       onClick={() => disponivel && onClick(numero)}
     >
-      {numero}
+      
     </div>
   );
 }

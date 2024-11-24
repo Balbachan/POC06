@@ -9,16 +9,10 @@ export function MovieInfo({ titulo, sinopse, direcao, horario, preco }) {
   return (
     <div>
       <h2>{titulo}</h2>
-      <p>
-        <strong>Horário:</strong> {horario}
-      </p>
-      <p>
-        <strong>Direção:</strong> {direcao}
-      </p>
+      <p><b>Horário:</b> {horario}</p>
+      <p><b>Direção:</b>{direcao}</p> 
       <p>{sinopse}</p>
-      <p>
-        <strong>Preço:</strong> R$ {preco.toFixed(2)}
-      </p>
+      <p><b>Preço:</b> R$ {preco.toFixed(2)}</p>
     </div>
   );
 }
@@ -44,7 +38,7 @@ export default function Home() {
       </div>
 
       <div className={styles.seatingChart}>
-        {data.assentos.map((seat) => (
+        {data.assentos.slice(0,56).map((seat) => (
           <Seat
             key={seat.numero}
             {...seat}
@@ -55,7 +49,7 @@ export default function Home() {
       </div>
 
       <div className={styles.extraRow}>
-        {data.assentos.slice(56, 59).map((seat) => (
+        {data.assentos.slice(56, 61).map((seat) => (
           <Seat
             key={seat.numero}
             {...seat}
@@ -85,7 +79,7 @@ export default function Home() {
         <div className={styles.legendaItem}>
           <div
             className={`${styles.legendaCirculo}`}
-            style={{ backgroundColor: "var(--primary)" }} // Cor para selecionado
+            style={{ backgroundColor: "var(--primary-color)" }} // Cor para selecionado
           ></div>
           <p>Selecionado</p>
         </div>
@@ -98,58 +92,3 @@ export default function Home() {
     </main>
   );
 }
-
-
-
-/*"use client";
-import styles from "./page.module.css";
-//import Header from "./components/header.js";
-import { useEffect, useState } from "react";
-const dados = require("./dados.json");
-
-export default function Home() {
-  const [dados, setDados] = useState(null);
-  useEffect(() => {
-    fetch("/dados2.json")
-      .then((response) => {
-        if (reponse.ok) {
-          throw new error("Não foi possível ler os dados");
-        }
-        return reponse.json();
-      })
-      .then((jsonData) => setDados(jsonData))
-      .catch((err) => setDados);
-  });
-
-  if (dados === null) {
-    return (
-      <main>
-        <Header title="Carregando..." />
-      </main>
-    );
-  }
-
-  if (dados.error) {
-    return (
-      <main>
-        <Header title={dados.error} />
-      </main>
-    );
-  }
-
-  return (
-    <main className={styles.main}>
-      <h1>{dados.titulo}</h1>
-      <p>{dados.sinopse}</p>
-
-      <ol>
-        {dados.assentos.map((assento) => (
-          <li key={assento.numero}>
-            Assento {assento.numero} está disponivel?
-            {assento.disponivel ? "sim" : "não"}
-          </li>
-        ))}
-      </ol>
-    </main>
-  );
-}*/
