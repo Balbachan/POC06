@@ -1,6 +1,7 @@
 "use client";
+import './globals.css';
 import styles from "./page.module.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import data from "./data/dados.json";
 import Seat from "./components/seat";
 
@@ -24,27 +25,22 @@ export function MovieInfo({ titulo, sinopse, direcao, horario, preco }) {
 
 export default function Home() {
   const [selectedSeats, setSelectedSeats] = useState([]);
+  const ticketPrice = 25; // Definindo o preço fixo do ingresso
 
   const OrganizarSelectSeat = (numero) => {
-    setSelectedSeats(
-      (prev) =>
-        prev.includes(numero)
-          ? prev.filter((n) => n !== numero)
-          : [...prev, numero]
-
-      //Quando o usuário clica em um assento:Se já está selecionado, o código remove o assento da lista. Se não, o código adiciona o assento à lista.
-      /*  numero: número do assento que o usuário acabou de clicar.
-       * setSelectedSeats: a função que altera o estado de selectedSeats, fornecida pelo React através do useState.
-       * prev: valor atual de selectedSeats (lista de assentos que já estão selecionados).*/
+    setSelectedSeats((prev) =>
+      prev.includes(numero)
+        ? prev.filter((n) => n !== numero)
+        : [...prev, numero]
     );
   };
+
+  const total = selectedSeats.length * ticketPrice; // Calculando o total com base nos assentos selecionados
 
   return (
     <main className={styles.container}>
       <div className={styles.movieInfo}>
-        <MovieInfo
-          {...data} /*spread passa as propriedades do objeto data para o componente*/
-        />
+        <MovieInfo {...data} />
       </div>
 
       <div className={styles.seatingChart}>
@@ -75,31 +71,36 @@ export default function Home() {
         <div className={styles.legendaItem}>
           <div
             className={`${styles.legendaCirculo}`}
-            style={{ backgroundColor: "#bababa" }} // Cor para disponível
+            style={{ backgroundColor: "var(--available)"}} // Cor para disponível
           ></div>
           <span>Disponível</span>
         </div>
         <div className={styles.legendaItem}>
           <div
             className={`${styles.legendaCirculo}`}
-            style={{ backgroundColor: "#1a1a2a" }} // Cor para indisponível
+            style={{ backgroundColor: "var(--unavailable)"}} // Cor para indisponível
           ></div>
           <p>Indisponível</p>
         </div>
         <div className={styles.legendaItem}>
           <div
             className={`${styles.legendaCirculo}`}
-            style={{ backgroundColor: "#db3d2e" }} // Cor para selecionado
+            style={{ backgroundColor: "var(--primary)" }} // Cor para selecionado
           ></div>
           <p>Selecionado</p>
         </div>
       </div>
+
+      {/* Botão com o valor atualizado */}
       <button className={styles.buyButton}>
-        Comprar ({selectedSeats.length} assentos)
+        Comprar ({selectedSeats.length} assentos) - R$ {total.toFixed(2)}
       </button>
     </main>
   );
 }
+
+
+
 /*"use client";
 import styles from "./page.module.css";
 //import Header from "./components/header.js";

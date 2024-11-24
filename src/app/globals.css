@@ -1,0 +1,28 @@
+:root {
+  --background-color: #F0F0F0;
+  --foreground-color: #1A1A24;
+  --primary-color: #D83D2E;
+  --secondary-color: #505050;
+  --text-color: #000000;
+  --available: #BABABA;
+  --unavailable: #1A1A24;
+}
+
+[data-theme="dark"] {
+  --background-color: #1A1A24;
+  --foreground-color: #F0F0F0;
+  --primary-color: #CDA43E;
+  --secondary-color: #BABABA;
+  --button-text: #F0F0F0;
+  --available: #F0F0F0;
+  --unavailable: #505050;
+}
+
+body {
+  background-color: var(--background-color); /* Cor de fundo dinâmica */
+  color: var(--foreground-color);                 /* Cor do texto dinâmica */
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Transição suave */
+}
