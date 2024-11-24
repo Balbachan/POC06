@@ -10,9 +10,10 @@
     * [Adicionar Dados dos Assentos](#dadosAssentos)
     * [Criar o Componente de Assento](#componentesAssentos)
     * [Estilizar o Projeto](#estilizar)
+         * [Organização dos assentos]
+         * [Responsividade]
+         * [Light/Dark Mode]
     * [Criar o Componente Principal](#componentePrincipal)
-    *
-    * 
     * [Testar o Projeto](#testar)
 
 * [Autoras](#autoras)
@@ -472,6 +473,35 @@ export default function Seat({ numero, disponivel, onClick, selected }) { ... }
    <div id="estilizar">
 
 ## 5.Estilizar o Projeto
+
+### Organização dos assentos
+
+No arquivo `src/styles/globals.css`: 
+
+```css
+:root {
+  --background-color: #f5f5f5;
+  --primary-color: #007bff;
+  --available: #cce5ff;
+  --unavailable: #f5c6cb;
+}
+```
+
+
+No arquivo `src/styles/page.module.css`:
+
+```css
+Copiar código
+.container { max-width: 800px; margin: 0 auto; padding: 20px; }
+.movieInfo { margin-bottom: 20px; }
+.seatingChart { display: grid; grid-template-columns: repeat(10, 1fr); gap: 10px; }
+.buyButton { background-color: var(--primary-color); color: #fff; border: none; padding: 10px; cursor: pointer; }
+
+```
+
+### Responsividade
+
+### Ligh/Dark mode
         
    </div>
 
