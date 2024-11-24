@@ -305,32 +305,127 @@
     
   </div> 
 
-  <div id="comoFazer">
+<div id="comoFazer">
 
 ## Como fazer?
 
-      <div id="configurar">
+   <div id="configurar">
 
  ## 1. Configurar o Ambiente e criar o projeto
+  
+   - Certifique-se de ter o Node.js instalado.
+   - Execute os seguintes comandos no terminal:
+
+   1-Abrir o prompt de comando `cmd` <enter> ou o terminal do vscode.
+   
+   2-Digitar o comando ` npm install -g npm@latest` e apertar <enter> para atualizar pacotes.
+   
+   3-Digitar o comando `npx create-next-app@latest` <enter> para criar um novo projeto NextJS.
+   
+   4-Caso seja pedido para instalar pacotes extras ("Need to install the following packages: ... OK to proceed (y)?") aceitar, digitando Y <enter>.
+
+   
+
+   Em seguida, responder o seguinte nas perguntas para criar o novo projeto NextJS (aqui apresentaremos sugestões):
+
+   √ What is your project named? ... poc6 (obs.: poc6 é o nome deste projeto, pode usar outro)
+   
+   √ Would you like to use TypeScript? ...  *# No*  / Yes
+   
+   √ Would you like to use ESLint? ... No / *# Yes*
+   
+   √ Would you like to use Tailwind CSS? ... *# No* / Yes
+   
+   √ Would you like your code inside a `src/` directory? ... No / *# Yes*
+   
+   √ Would you like to use App Router? (recommended) ... No / *# Yes*
+   
+   √ Would you like to use Turbopack for next dev? ... *# No* / Yes
+   
+   √ Would you like to customize the import alias (@/* by default)? ... *# No* / Yes
 
 
       </div>
 
-     <div id="estrutura">
+
+   <div id="estrutura">
 
 ## 2. Estrutura do Projeto
 
+POC06/
+├── src/app
+
+│   ├── components/
+
+│   │   └── Seat.jsx
+|   |   └── seat.module.css
+
+│   ├── data/
+│   │   └── dados.json
+
+
+│   ├── globals.css
+
+│   ├── page.module.css
+
+│   ├── page.js
+
+│   └─
+└── package.json
+
+
      </div>
 
-     <div id="dadosAssentos">
+   <div id="dadosAssentos">
 
 ## 3. Adicionar Dados dos Assentos
 
+No arquivo `src/data/dados.json`:
+
+```json
+
+{
+  "titulo": "Todo tempo que temos",
+  "sinopse": "Almut e Tobias são unidos por um encontro surpresa...",
+  "direcao": "John Crowley",
+  "horario": "19:30",
+  "preco": 25.0,
+  "assentos": [
+    { "numero": 1, "disponivel": false }, // pré definir como indisponível para verificar se vai funcionar
+    { "numero": 2, "disponivel": true },
+    ...
+  ]
+}
+
+
+```
+
      </div>
 
-     <div id="componentesAssentos">
+<div id="componentesAssentos">
 
 ## 4.Criar o Componente de Assento
+
+No arquivo `src/components/Seat.jsx`:
+
+```js
+
+import styles from "./seat.module.css";
+
+export default function Seat({ numero, disponivel, onClick, selected }) {
+  return (
+    <div
+      className={`${styles.seat} ${
+        disponivel ? styles.available : styles.unavailable
+      } ${selected ? styles.selected : ""}`}
+      onClick={() => disponivel && onClick(numero)}
+    >
+      {numero}
+    </div>
+  );
+}
+
+```
         
      </div>
 
