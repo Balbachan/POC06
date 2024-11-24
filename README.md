@@ -345,7 +345,7 @@
    √ Would you like to customize the import alias (@/* by default)? ... *# No* / Yes
 
 
-      </div>
+   </div>
 
 
    <div id="estrutura">
@@ -374,7 +374,7 @@ POC06/
 └── package.json
 
 
-     </div>
+   </div>
 
    <div id="dadosAssentos">
 
@@ -400,7 +400,7 @@ No arquivo `src/data/dados.json`:
 
 ```
 
-     </div>
+   </div>
 
 <div id="componentesAssentos">
 
@@ -426,22 +426,62 @@ export default function Seat({ numero, disponivel, onClick, selected }) {
 }
 
 ```
-        
-     </div>
 
-      <div id="estilizar">
+Esta parte do código faz as seguintes funções: 
+
+```js
+import styles from "./seat.module.css";
+```
+
+* Importa o arquivo CSS modular (seat.module.css) que contém as classes específicas para estilizar cada assento.
+* CSS Modules garantem que os estilos sejam aplicados localmente ao componente, evitando conflitos com outras partes do projeto.
+
+
+
+```js
+export default function Seat({ numero, disponivel, onClick, selected }) { ... }
+```
+
+* O componente recebe propriedades (props):
+   *numero: o número do assento exibido no botão.
+   * disponivel: booleano que indica se o assento está disponível.
+   * onClick: função chamada quando o assento é clicado.
+   * selected: booleano que indica se o assento foi selecionado.
+
+
+ ```js
+<div
+  className={`${styles.seat} ${
+    disponivel ? styles.available : styles.unavailable
+  } ${selected ? styles.selected : ""}`}
+  onClick={() => disponivel && onClick(numero)}
+>
+  {numero}
+</div>
+
+```
+
+* Define a classe do div com base nas propriedades:
+   * Sempre aplica styles.seat (estilo base para todos os assentos).
+   * Aplica styles.available se o assento estiver disponível, ou styles.unavailable se não estiver.
+   * Adiciona styles.selected se o assento estiver selecionado.
+   * O evento de clique (onClick) é configurado para executar onClick(numero) somente se o assento estiver disponível (disponivel === true).
+        
+   </div>
+
+   <div id="estilizar">
 
 ## 5.Estilizar o Projeto
         
-     </div>
+   </div>
 
-      <div id="componentePrincipal">
+   <div id="componentePrincipal">
 
 ## 6. Criar o Componente Principal
         
-     </div>
+   </div>
 
-      <div id="testar">
+   <div id="testar">
 
 ## 7.Testar o Projeto
 
@@ -453,7 +493,7 @@ npm run dev
 
 Abra o link do localhost
         
-     </div>
+   </div>
 
   </div>
 
@@ -466,48 +506,3 @@ Abra o link do localhost
 * Laura Carolina Balbachan dos Santos
 
 </div>
-
-  
-  
-
-
----------------------------------------------------------------------------------------------------------------------------
-
-https://codesandbox.io/p/github/Balbachan/POC06/main?workspaceId=62ab7042-b701-4895-a6cd-a6d9bc371a05
-
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
