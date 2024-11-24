@@ -480,10 +480,14 @@ No arquivo `src/styles/globals.css`:
 
 ```css
 :root {
-  --background-color: #f5f5f5;
-  --primary-color: #007bff;
-  --available: #cce5ff;
-  --unavailable: #f5c6cb;
+  --background-color: #F0F0F0;
+  --foreground-color: #1A1A24;
+  --primary-color: #D83D2E;
+  --secondary-color: #505050;
+  --text-color: #000000;
+  --available: #BABABA;
+  --unavailable: #1A1A24;
+}
 }
 ```
 
