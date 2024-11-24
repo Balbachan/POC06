@@ -9,10 +9,10 @@ export function MovieInfo({ titulo, sinopse, direcao, horario, preco }) {
   return (
     <div>
       <h2>{titulo}</h2>
-      <p>Horário:</p> {horario}
-      <p>Direção:</p> {direcao}
+      <p><b>Horário:</b> {horario}</p>
+      <p><b>Direção:</b>{direcao}</p> 
       <p>{sinopse}</p>
-      <p>Preço:</p> R$ {preco.toFixed(2)}
+      <p><b>Preço:</b> R$ {preco.toFixed(2)}</p>
     </div>
   );
 }
@@ -49,7 +49,7 @@ export default function Home() {
       </div>
 
       <div className={styles.extraRow}>
-        {data.assentos.slice(57, 61).map((seat) => (
+        {data.assentos.slice(56, 61).map((seat) => (
           <Seat
             key={seat.numero}
             {...seat}
