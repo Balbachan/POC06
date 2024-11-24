@@ -3,16 +3,18 @@
 ## Sumário
 * [Objetivo](#objetivo)
 * [Desafio](#desafio)
-* [Como fazer? ](#solucao)
+* [Como fazer? ](#comoFazer)
+
     * [Configurar o ambiente](#configurar)
     * [Estrutura do projeto](#estrutura)
     * [Adicionar Dados dos Assentos](#dadosAssentos)
     * [Criar o Componente de Assento](#componentesAssentos)
     * [Estilizar o Projeto](#estilizar)
     * [Criar o Componente Principal](#componentePrincipal)
+    *
     * 
     * [Testar o Projeto](#testar)
-* 
+
 * [Autoras](#autoras)
 
   <div id="objetivo" >
@@ -303,7 +305,62 @@
     
   </div> 
 
-  
+  <div id="comoFazer">
+
+## Como fazer?
+
+      <div id="configurar">
+
+ ## 1. Configurar o Ambiente e criar o projeto
+
+
+      </div>
+
+     <div id="estrutura">
+
+## 2. Estrutura do Projeto
+
+     </div>
+
+     <div id="dadosAssentos">
+
+## 3. Adicionar Dados dos Assentos
+
+     </div>
+
+     <div id="componentesAssentos">
+
+## 4.Criar o Componente de Assento
+        
+     </div>
+
+      <div id="estilizar">
+
+## 5.Estilizar o Projeto
+        
+     </div>
+
+      <div id="componentePrincipal">
+
+## 6. Criar o Componente Principal
+        
+     </div>
+
+      <div id="testar">
+
+## 7.Testar o Projeto
+
+Execute no terminal:
+
+``` bash
+npm run dev
+```
+
+Abra o link do localhost
+        
+     </div>
+
+  </div>
 
   <div id="autoras">
 
