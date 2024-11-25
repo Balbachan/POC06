@@ -90,32 +90,32 @@ export default function Home() {
           <div className={styles.tela}>Tela</div>
 
           <div className={styles.legenda}>
-            <div className={styles.legendaItem}>
-              <div
-                className={`${styles.legendaCirculo}`}
-                style={{ backgroundColor: "var(--available)" }} // Cor para disponível
-              ></div>
-              <span>Disponível</span>
-            </div>
-            <div className={styles.legendaItem}>
-              <div
-                className={`${styles.legendaCirculo}`}
-                style={{ backgroundColor: "var(--unavailable)" }} // Cor para indisponível
-              ></div>
-              <p>Indisponível</p>
-            </div>
-            <div className={styles.legendaItem}>
-              <div
-                className={`${styles.legendaCirculo}`}
-                style={{ backgroundColor: "var(--primary-color)" }} // Cor para selecionado
-              ></div>
-              <p>Selecionado</p>
-            </div>
-          </div>
+        <div className={styles.legendaItem}>
+          <div
+            className={`${styles.legendaCirculo}`}
+            style={{ backgroundColor: "var(--available)"}} // Cor para disponível
+          ></div>
+          <span>Disponível</span>
+        </div>
+        <div className={styles.legendaItem}>
+          <div
+            className={`${styles.legendaCirculo}`}
+            style={{ backgroundColor: "var(--unavailable)"}} // Cor para indisponível
+          ></div>
+          <p>Indisponível</p>
+        </div>
+        <div className={styles.legendaItem}>
+          <div
+            className={`${styles.legendaCirculo}`}
+            style={{ backgroundColor: "var(--primary-color)" }} // Cor para selecionado
+          ></div>
+          <p>Selecionado</p>
+        </div>
+      </div>
         </section>
       </main>
-
-      <div className={styles.buySection}>
+      
+      <div className={styles.buySection} onClick={handleBuyClick}>
             <button className={styles.buyButton}>
               Comprar ({selectedSeats.length} assentos) - R$ {total.toFixed(2)}
             </button>
