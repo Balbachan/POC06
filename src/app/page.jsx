@@ -1,7 +1,7 @@
 "use client";
 import './globals.css';
 import styles from "./page.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import data from "./data/dados.json";
 import Seat from "./components/seat";
 
@@ -23,9 +23,23 @@ export function MovieInfo({ titulo, sinopse, direcao, horario, data }) {
 
 export default function Home() {
   const [selectedSeats, setSelectedSeats] = useState([]);
-  const ticketPrice = 25; // Definindo o preço fixo do ingresso
+  const [purchasedSeats, setPurchasedSeats] = useState([]);  // Estado para assentos comprados
+  const ticketPrice = 25; // Preço fixo do ingresso
+
+  // Carrega os assentos do localStorage ou usa os dados iniciais
+  useEffect(() => {
+    const savedSeats = JSON.parse(localStorage.getItem("selectedSeats")) || [];
+    setSelectedSeats(savedSeats);
+  }, []);
+
+  // Salva os assentos no localStorage sempre que o estado mudar
+  useEffect(() => {
+    localStorage.setItem("selectedSeats", JSON.stringify(selectedSeats));
+  }, [selectedSeats]);
 
   const OrganizarSelectSeat = (numero) => {
+    if (purchasedSeats.includes(numero)) return; // Não permite selecionar assentos comprados
+
     setSelectedSeats((prev) =>
       prev.includes(numero)
         ? prev.filter((n) => n !== numero)
@@ -33,7 +47,13 @@ export default function Home() {
     );
   };
 
-  const total = selectedSeats.length * ticketPrice; // Calculando o total com base nos assentos selecionados
+  const total = selectedSeats.length * ticketPrice; // Total dos assentos selecionados
+
+  const handleBuyClick = () => {
+    setPurchasedSeats((prev) => [...prev, ...selectedSeats]); // Marca os assentos como comprados
+    setSelectedSeats([]); // Limpa os assentos selecionados após a compra
+    alert(`Você comprou ${selectedSeats.length} assentos por R$ ${total.toFixed(2)}`);
+  };
 
   return (
     <>

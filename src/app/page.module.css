@@ -99,7 +99,10 @@
   line-height: 20px;
   font-size: 14px;
   font-weight: bold;
+  color: var(--foreground-color);
 }
+
+
 
 /* Legenda */
 .legenda {

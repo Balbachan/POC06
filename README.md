@@ -421,7 +421,6 @@ export default function Seat({ numero, disponivel, onClick, selected }) {
       } ${selected ? styles.selected : ""}`}
       onClick={() => disponivel && onClick(numero)}
     >
-      {numero}
     </div>
   );
 }
@@ -494,14 +493,49 @@ No arquivo `src/styles/globals.css`:
 
 No arquivo `src/styles/page.module.css`:
 
-```css
-Copiar código
-.container { max-width: 800px; margin: 0 auto; padding: 20px; }
-.movieInfo { margin-bottom: 20px; }
-.seatingChart { display: grid; grid-template-columns: repeat(10, 1fr); gap: 10px; }
-.buyButton { background-color: var(--primary-color); color: #fff; border: none; padding: 10px; cursor: pointer; }
+```.movieInfo {
+  margin-bottom: 20px;
+}
 
+.seatingChart {
+  display: grid; grid-template-columns: repeat(8, 1fr); gap: 10px;margin-top: 20px;
+}
+
+.buyButton {
+  margin-top: 20px; padding: 10px; background-color: var(--primary-color);color: white;border: none;border-radius: 5px;cursor: pointer;
+}
+.extraRow {
+  grid-template-columns: repeat(4, 1fr); margin-top: 10px;  display:flex;  justify-content: space-around;  
+}
+
+.tela {
+  width: 100%;height: 20px;background-color: var(--available);border-radius: 10px;margin: 20px auto;text-align: center;line-height: 20px;font-size: 14px;font-weight: bold;
+}
+
+.legenda {
+  display: flex;justify-content: center;gap: 20px;margin-top: 20px;
+}
+
+.legendaItem {
+  display: flex;align-items: center;gap: 8px;
+}
+
+.legendaCirculo {
+  width: 15px; height: 15px; border-radius: 50%;
+}
 ```
+
+O código define estilos para organizar e estilizar elementos de uma aplicação de reservas de assentos:
+
+- **`.movieInfo`**: Espaço abaixo das informações do filme.
+- **`.seatingChart`**: Grade para exibir assentos (8 colunas, espaçamento uniforme).
+- **`.buyButton`**: Botão estilizado com cor, bordas arredondadas e cursor clicável.
+- **`.extraRow`**: Linha flexível para alinhar elementos horizontalmente.
+- **`.tela`**: Representa a tela no layout, com texto centralizado.
+- **`.legenda` e `.legendaItem`**: Organizam a legenda com itens espaçados e alinhados.
+- **`.legendaCirculo`**: Ícones circulares para status dos assentos.
+
+Esses estilos garantem um layout organizado, visual atraente e usabilidade intuitiva.
 
 ### Responsividade
 
@@ -512,6 +546,93 @@ Copiar código
    <div id="componentePrincipal">
 
 ## 6. Criar o Componente Principal
+
+6.1 Importação de Dependências
+
+```javascript
+import { useState } from "react";
+import data from "./data/dados.json";
+import Seat from "./components/Seat";
+import styles from "./styles/page.module.css";
+```
+
+* useState: Para gerenciar o estado local dos assentos selecionados.
+* data: Carrega os dados do filme e dos assentos a partir de um arquivo JSON.
+* Seat: Importa o componente Seat, que representa cada assento individual.
+* styles: Importa os estilos CSS para a página principal.
+
+6.2 Gerenciamento de Estado
+
+```javascript
+const [selectedSeats, setSelectedSeats] = useState([]);
+```
+
+O estado selectedSeats armazena os números dos assentos que foram selecionados pelo usuário.
+
+6.3 Função para Gerenciar a Seleção de Assentos
+
+```javascript
+Copiar código
+const OrganizarSelectSeat = (numero) => {
+  setSelectedSeats((prev) =>
+    prev.includes(numero)
+      ? prev.filter((n) => n !== numero)
+      : [...prev, numero]
+  );
+};
+```
+
+Objetivo: Alternar a seleção dos assentos.
+Se o número do assento já estiver na lista (selectedSeats), ele será removido. Caso contrário, será adicionado.
+Essa lógica permite que o estado se atualize dinamicamente à medida que o usuário interage com os assentos.
+
+6.4 Cálculo do Total
+
+```javascript
+const total = selectedSeats.length * ticketPrice;
+```
+
+Multiplica o número de assentos selecionados pelo preço fixo de cada ingresso (ticketPrice).
+
+6.5 Estrutura do Componente
+
+```javascript
+return (
+  <main className={styles.container}>
+    <div className={styles.movieInfo}>
+      <h2>{data.titulo}</h2>
+      <p>{data.sinopse}</p>
+    </div>
+    <div className={styles.seatingChart}>
+      {data.assentos.map((seat) => (
+        <Seat
+          key={seat.numero}
+          {...seat}
+          onClick={OrganizarSelectSeat}
+          selected={selectedSeats.includes(seat.numero)}
+        />
+      ))}
+    </div>
+    <button className={styles.buyButton}>
+      Comprar ({selectedSeats.length}) - R$ {total.toFixed(2)}
+    </button>
+  </main>
+);
+```
+
+* Informações do Filme: Mostra o título e a sinopse extraídos do JSON.
+* Grade de Assentos: Usa `data.assentos.map()` para renderizar dinamicamente os assentos. Cada assento é um componente Seat, que recebe:
+  * As propriedades do JSON (número e disponibilidade).
+   * O evento onClick para alternar a seleção.
+   * A indicação de seleção (selected).
+     
+* Botão de Compra: Exibe a quantidade de assentos selecionados e o preço total calculado. Exemplo se o preço do ingresso for R$25,00:
+
+  
+  ![image](https://github.com/user-attachments/assets/e7b93b42-ad68-4d3c-ad9d-5819de9ec1d5)
+
+
+
         
    </div>
 
