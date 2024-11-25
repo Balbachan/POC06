@@ -16,7 +16,7 @@ export function MovieInfo({ titulo, sinopse, direcao, horario, data }) {
       <p>{data}</p>
       <p><b>Direção:</b></p>
       <p>{direcao}</p>
-      
+
     </div>
   );
 }
@@ -41,11 +41,7 @@ export default function Home() {
       <main className={styles.container}>
         <div className={styles.movieInfo}>
           <MovieInfo {...data} />
-          <div className={styles.buySection}>
-        <button className={styles.buyButton}>
-          Comprar ({selectedSeats.length} assentos) - R$ {total.toFixed(2)}
-        </button>
-      </div>
+          
         </div>
 
         <section className={styles.sessaoAssentos}>
@@ -99,7 +95,11 @@ export default function Home() {
         </section>
       </main>
 
-      
+      <div className={styles.buySection}>
+            <button className={styles.buyButton}>
+              Comprar ({selectedSeats.length} assentos) - R$ {total.toFixed(2)}
+            </button>
+          </div>
     </>
   );
 }
