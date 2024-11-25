@@ -541,6 +541,109 @@ O código define estilos para organizar e estilizar elementos de uma aplicação
 Esses estilos garantem um layout organizado, visual atraente e usabilidade intuitiva.
 
 ### Responsividade
+A responsividade do projeto foi cuidadosamente planejada para proporcionar uma experiência consistente e intuitiva em diferentes dispositivos, desde desktops até smartphones. Por meio de media queries e ajustes de layout, os elementos da aplicação, como a grade de assentos, informações do filme e botões, se reorganizam automaticamente para se adaptar a diferentes tamanhos de tela.
+5.1. Adaptação Geral do Layout
+Flexibilidade do container principal (.container):
+* Para telas menores, o layout muda de "row-reverse" (elementos alinhados lado a lado) para uma disposição em coluna. Isso é feito usando:
+No arquivo `src/styles/page.module.css`:
+
+``` css
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px;
+  }
+}
+
+```
+* A largura máxima do container é ajustada dinamicamente com max-width, garantindo que ele se adapte a telas pequenas e grandes.
+  5.2. Ocultação de Informações em Telas Menores
+Em telas menores que 768px, apenas o título e o horário do filme permanecem visíveis:
+``` css
+@media (max-width: 768px) {
+  .movieInfo p, 
+  .movieInfo h3 {
+    display: none; /* Oculta a sinopse e subtítulos */
+  }
+}
+```
+* O título é centralizado para melhorar a legibilidade:
+ ```css
+@media (max-width: 768px) {
+  .movieInfo h2 {
+    text-align: center;
+  }
+}
+```
+5.3. Organização da Grade de Assentos
+A grade de assentos (.seatingChart) foi configurada para se ajustar ao tamanho da tela:
+Desktop: 8 colunas são exibidas, aproveitando o espaço.
+```css
+.seatingChart {
+  grid-template-columns: repeat(8, 1fr);
+}
+```
+* Telas menores (480px):
+O espaçamento entre os assentos (gap) foi reduzido.
+Margens ajustadas para acomodar melhor os assentos:
+```css
+@media (max-width: 480px) {
+  .seatingChart {
+    gap: 2px;
+    margin-right: 2px;
+    margin-top: 0;
+  }
+}
+```
+5.4. Botão de Compra
+Para telas pequenas, o botão de compra foi ajustado:
+Margens e alinhamento centralizado:
+```css
+@media (max-width: 768px) {
+  .buySection {
+    margin-left: 0;
+    margin-top: 15px;
+    margin-bottom: 30px;
+  }
+}
+```
+* Para telas muito pequenas (480px), a altura do botão foi aumentada para melhorar a usabilidade:
+```css
+
+@media (max-width: 480px) {
+  .buyButton {
+    height: 70px;
+  }
+}
+```
+5.5. Componente extraRow
+Representando uma fileira extra de assentos, o componente foi configurado para manter espaçamento e centralização:
+Em telas menores, ajustes garantem que ele continue alinhado:
+```css
+
+@media (max-width: 480px) {
+  .extraRow {
+    gap: 10px;
+    margin-right: 2px;
+    margin-top: 2px;
+  }
+}
+```
+5.6. Outros Ajustes Importantes
+Tela do cinema (.tela):
+
+Redução de fonte para dispositivos menores:
+``` css
+
+@media (max-width: 768px) {
+  .tela {
+    font-size: 12px;
+  }
+}
+```
+* Resultado: essas configurações garantem que o projeto funcione de maneira fluida em qualquer dispositivo. Em telas menores, a interface prioriza a clareza e a usabilidade, ocultando informações secundárias (como sinopse) e ajustando elementos como grades e botões para que fiquem acessíveis e visualmente organizados.
+
 
 ### Ligh/Dark mode
         
@@ -575,7 +678,6 @@ O estado selectedSeats armazena os números dos assentos que foram selecionados 
 6.3 Função para Gerenciar a Seleção de Assentos
 
 ```javascript
-Copiar código
 const OrganizarSelectSeat = (numero) => {
   setSelectedSeats((prev) =>
     prev.includes(numero)
