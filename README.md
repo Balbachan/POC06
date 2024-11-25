@@ -476,7 +476,7 @@ export default function Seat({ numero, disponivel, onClick, selected }) { ... }
 
 ## 5.Estilizar o Projeto
 
-### Organização dos assentos
+### Ligh/Dark mode
 
 No arquivo `src/styles/globals.css`: 
 
@@ -527,6 +527,9 @@ body {
 }
 ```
 Por fim, a configuração geral do comportamento de body.
+
+
+### Organização dos assentos 
 
 No arquivo `src/styles/page.module.css`:
 
@@ -680,7 +683,7 @@ Redução de fonte para dispositivos menores:
 * Resultado: essas configurações garantem que o projeto funcione de maneira fluida em qualquer dispositivo. Em telas menores, a interface prioriza a clareza e a usabilidade, ocultando informações secundárias (como sinopse) e ajustando elementos como grades e botões para que fiquem acessíveis e visualmente organizados.
 
 
-### Ligh/Dark mode
+
         
    </div>
 
