@@ -20,7 +20,13 @@
   background-color: var(--unavailable);
   cursor: not-allowed; /*Cursor desativado*/
 }
+
 .selected {
   border: 2px solid var(--primary-color);
   background-color: var(--primary-color);
+}
+
+.purchased {
+  background-color: var(--unavailable); 
+  cursor: not-allowed; 
 }
