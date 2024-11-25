@@ -542,6 +542,7 @@ Esses estilos garantem um layout organizado, visual atraente e usabilidade intui
 
 ### Responsividade
 A responsividade do projeto foi cuidadosamente planejada para proporcionar uma experiência consistente e intuitiva em diferentes dispositivos, desde desktops até smartphones. Por meio de media queries e ajustes de layout, os elementos da aplicação, como a grade de assentos, informações do filme e botões, se reorganizam automaticamente para se adaptar a diferentes tamanhos de tela.
+
 5.1. Adaptação Geral do Layout
 Flexibilidade do container principal (.container):
 * Para telas menores, o layout muda de "row-reverse" (elementos alinhados lado a lado) para uma disposição em coluna. Isso é feito usando:
