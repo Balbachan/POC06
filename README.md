@@ -691,13 +691,14 @@ Redução de fonte para dispositivos menores:
 6.1 Importação de Dependências
 
 ```javascript
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import data from "./data/dados.json";
 import Seat from "./components/Seat";
 import styles from "./styles/page.module.css";
 ```
 
 * useState: Para gerenciar o estado local dos assentos selecionados.
+* useEffect: Para sincronizar os assentos comprados com o `localStorage`.
 * data: Carrega os dados do filme e dos assentos a partir de um arquivo JSON.
 * Seat: Importa o componente Seat, que representa cada assento individual.
 * styles: Importa os estilos CSS para a página principal.
