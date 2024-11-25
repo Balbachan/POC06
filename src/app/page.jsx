@@ -5,14 +5,18 @@ import { useState } from "react";
 import data from "./data/dados.json";
 import Seat from "./components/seat";
 
-export function MovieInfo({ titulo, sinopse, direcao, horario, preco }) {
+export function MovieInfo({ titulo, sinopse, direcao, horario, data }) {
   return (
     <div>
-      <h2>{titulo}</h2>
-      <p><b>Horário:</b> {horario}</p>
-      <p><b>Direção:</b>{direcao}</p> 
+      <h1>{titulo}</h1>
+      <h2><b>{horario}</b> </h2>
+      <p><b>Sinopse</b></p>
       <p>{sinopse}</p>
-      <p><b>Preço:</b> R$ {preco.toFixed(2)}</p>
+      <p><b>Data de lançamento:</b></p>
+      <p>{data}</p>
+      <p><b>Direção:</b></p>
+      <p>{direcao}</p>
+      
     </div>
   );
 }
@@ -32,63 +36,70 @@ export default function Home() {
   const total = selectedSeats.length * ticketPrice; // Calculando o total com base nos assentos selecionados
 
   return (
-    <main className={styles.container}>
-      <div className={styles.movieInfo}>
-        <MovieInfo {...data} />
+    <>
+      {/* Seção principal com informações do filme e assentos */}
+      <main className={styles.container}>
+        <div className={styles.movieInfo}>
+          <MovieInfo {...data} />
+          <div className={styles.buySection}>
+        <button className={styles.buyButton}>
+          Comprar ({selectedSeats.length} assentos) - R$ {total.toFixed(2)}
+        </button>
       </div>
-
-      <div className={styles.seatingChart}>
-        {data.assentos.slice(0,56).map((seat) => (
-          <Seat
-            key={seat.numero}
-            {...seat}
-            onClick={OrganizarSelectSeat}
-            selected={selectedSeats.includes(seat.numero)} // Passa a informação se o assento está selecionado
-          />
-        ))}
-      </div>
-
-      <div className={styles.extraRow}>
-        {data.assentos.slice(56, 61).map((seat) => (
-          <Seat
-            key={seat.numero}
-            {...seat}
-            onClick={OrganizarSelectSeat}
-            selected={selectedSeats.includes(seat.numero)}
-          />
-        ))}
-      </div>
-
-      <div className={styles.tela}>Tela</div>
-
-      <div className={styles.legenda}>
-        <div className={styles.legendaItem}>
-          <div
-            className={`${styles.legendaCirculo}`}
-            style={{ backgroundColor: "var(--available)"}} // Cor para disponível
-          ></div>
-          <span>Disponível</span>
         </div>
-        <div className={styles.legendaItem}>
-          <div
-            className={`${styles.legendaCirculo}`}
-            style={{ backgroundColor: "var(--unavailable)"}} // Cor para indisponível
-          ></div>
-          <p>Indisponível</p>
-        </div>
-        <div className={styles.legendaItem}>
-          <div
-            className={`${styles.legendaCirculo}`}
-            style={{ backgroundColor: "var(--primary-color)" }} // Cor para selecionado
-          ></div>
-          <p>Selecionado</p>
-        </div>
-      </div>
 
-      {/* Botão com o valor atualizado */}
-      <button className={styles.buyButton}>
-        Comprar ({selectedSeats.length} assentos) - R$ {total.toFixed(2)}
-      </button>
-    </main>
+        <section className={styles.sessaoAssentos}>
+          <div className={styles.seatingChart}>
+            {data.assentos.slice(0, 56).map((seat) => (
+              <Seat
+                key={seat.numero}
+                {...seat}
+                onClick={OrganizarSelectSeat}
+                selected={selectedSeats.includes(seat.numero)} // Passa a informação se o assento está selecionado
+              />
+            ))}
+          </div>
+
+          <div className={styles.extraRow}>
+            {data.assentos.slice(56, 61).map((seat) => (
+              <Seat
+                key={seat.numero}
+                {...seat}
+                onClick={OrganizarSelectSeat}
+                selected={selectedSeats.includes(seat.numero)}
+              />
+            ))}
+          </div>
+
+          <div className={styles.tela}>Tela</div>
+
+          <div className={styles.legenda}>
+            <div className={styles.legendaItem}>
+              <div
+                className={`${styles.legendaCirculo}`}
+                style={{ backgroundColor: "var(--available)" }} // Cor para disponível
+              ></div>
+              <span>Disponível</span>
+            </div>
+            <div className={styles.legendaItem}>
+              <div
+                className={`${styles.legendaCirculo}`}
+                style={{ backgroundColor: "var(--unavailable)" }} // Cor para indisponível
+              ></div>
+              <p>Indisponível</p>
+            </div>
+            <div className={styles.legendaItem}>
+              <div
+                className={`${styles.legendaCirculo}`}
+                style={{ backgroundColor: "var(--primary-color)" }} // Cor para selecionado
+              ></div>
+              <p>Selecionado</p>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      
+    </>
   );
 }

@@ -1,40 +1,63 @@
+/* Container principal */
 .container {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 30px;
+  margin-top: 50px;
 }
 
 .movieInfo {
   margin-bottom: 20px;
+  max-width: 400px;
 }
 
+/* Apenas título e horário visíveis em dispositivos móveis */
+@media (max-width: 768px) {
+  .movieInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .movieInfo h2{
+    text-align: center;
+  }
+  .movieInfo p, /* Oculta os parágrafos */
+  .movieInfo h3 { /* Oculta subtítulos como "Sinopse" */
+    display: none;
+  }
+}
+
+/* Grade de assentos */
 .seatingChart {
   display: grid;
   grid-template-columns: repeat(8, 1fr);
-  gap: 10px;
+  gap: 2px;
   margin-top: 20px;
+  justify-content: center;
 }
 
-.buyButton {
-  margin-top: 20px;
-  padding: 10px;
-  background-color: var(--primary-color);
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+/* Ajusta a grade de assentos para telas menores */
+@media (max-width: 768px) {
+  .seatingChart {
+    gap: -2px;
+  }
 }
+
+/* Fileira extra */
 .extraRow {
+  display: grid;
   grid-template-columns: repeat(4, 1fr);
-  margin-top: 10px;
-  display:flex;
-  justify-content: space-around;
-  max-width: 400px;
-  margin-left: 174px;
-  
-  
+  gap: 10px;
+  margin: 10px auto;
+  justify-content: center;
 }
 
+/* Tela do cinema */
 .tela {
   width: 100%;
   height: 20px;
@@ -47,6 +70,7 @@
   font-weight: bold;
 }
 
+/* Legenda */
 .legenda {
   display: flex;
   justify-content: center;
@@ -64,4 +88,55 @@
   width: 15px;
   height: 15px;
   border-radius: 50%;
+}
+
+/* Botão de compra */
+.buySection {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.buyButton {
+  padding: 10px 20px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 23px;
+  cursor: pointer;
+  height: 50px;
+  font-size: 16px;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.buyButton:hover {
+  background-color: darkred;
+}
+
+/* Botão de compra para telas menores */
+@media (max-width: 768px) {
+  .buyButton {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+
+/* Ajustes para dispositivos móveis */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px;
+  }
+
+  .tela {
+    font-size: 12px;
+  }
+
+  .legenda {
+    flex-direction: column;
+    gap: 10px;
+  }
 }
