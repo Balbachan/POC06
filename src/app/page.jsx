@@ -66,14 +66,15 @@ export default function Home() {
 
         <section className={styles.sessaoAssentos}>
           <div className={styles.seatingChart}>
-            {data.assentos.slice(0, 56).map((seat) => (
-              <Seat
-                key={seat.numero}
-                {...seat}
-                onClick={OrganizarSelectSeat}
-                selected={selectedSeats.includes(seat.numero)} // Passa a informação se o assento está selecionado
-              />
-            ))}
+          {data.assentos.slice(0, 56).map((seat) => (
+            <Seat
+              key={seat.numero}
+              {...seat}
+              onClick={OrganizarSelectSeat}
+              selected={selectedSeats.includes(seat.numero)}
+              purchased={purchasedSeats.includes(seat.numero)} // Passa a informação de se o assento foi comprado
+            />
+          ))}
           </div>
 
           <div className={styles.extraRow}>
