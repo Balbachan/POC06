@@ -393,7 +393,7 @@ No arquivo `src/data/dados.json`:
   "sinopse": "Almut e Tobias são unidos por um encontro surpresa...",
   "direcao": "John Crowley",
   "horario": "19:30",
-  "preco": 25.0,
+  "data": 10 de novembro de 2024,
   "assentos": [
     { "numero": 1, "disponivel": false }, // pré definir como indisponível para verificar se vai funcionar
     { "numero": 2, "disponivel": true },
