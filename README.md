@@ -416,13 +416,13 @@ No arquivo `src/components/Seat.jsx`:
 
 import styles from "./seat.module.css";
 
-export default function Seat({ numero, disponivel, onClick, selected }) {
+export default function Seat({ numero, disponivel, onClick, selected, purchased }) {
   return (
     <div
       className={`${styles.seat} ${
         disponivel ? styles.available : styles.unavailable
-      } ${selected ? styles.selected : ""}`}
-      onClick={() => disponivel && onClick(numero)}
+      } ${selected ? styles.selected : ""} ${purchased ? styles.purchased : ""}`} 
+      onClick={() => disponivel && !purchased && onClick(numero)} 
     >
     </div>
   );
@@ -453,14 +453,13 @@ export default function Seat({ numero, disponivel, onClick, selected }) { ... }
 
 
  ```js
-<div
-  className={`${styles.seat} ${
-    disponivel ? styles.available : styles.unavailable
-  } ${selected ? styles.selected : ""}`}
-  onClick={() => disponivel && onClick(numero)}
->
-  {numero}
-</div>
+    <div
+      className={`${styles.seat} ${
+        disponivel ? styles.available : styles.unavailable
+      } ${selected ? styles.selected : ""} ${purchased ? styles.purchased : ""}`} 
+      onClick={() => disponivel && !purchased && onClick(numero)} 
+    >
+    </div>
 
 ```
 
@@ -468,6 +467,7 @@ export default function Seat({ numero, disponivel, onClick, selected }) { ... }
    * Sempre aplica styles.seat (estilo base para todos os assentos).
    * Aplica styles.available se o assento estiver disponível, ou styles.unavailable se não estiver.
    * Adiciona styles.selected se o assento estiver selecionado.
+   * Adiciona o styles.purchased se o assento tiver sido comprado.
    * O evento de clique (onClick) é configurado para executar onClick(numero) somente se o assento estiver disponível (disponivel === true).
         
    </div>
@@ -492,7 +492,41 @@ No arquivo `src/styles/globals.css`:
 }
 }
 ```
+Esse trecho de código é responsável pela definição da paleta de cores no _light mode_.
+![image](https://github.com/user-attachments/assets/9845886c-4957-4c0c-a7ff-d9bfbe436d81)
 
+
+
+
+```css
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: #1A1A24;
+    --foreground-color: #F0F0F0;
+    --primary-color: #D83D2E;
+    --secondary-color: #BABABA;
+    --button-text: #F0F0F0;
+    --available: #F0F0F0;
+    --unavailable: #505050;
+  }
+}
+```
+Com o uso do `@media (prefers-color-scheme: dark)`, definimos as cores do _dark mode_, caso seja essa a preferência do usuário.
+![image](https://github.com/user-attachments/assets/913f4d33-44c7-4d4d-97b0-a27efb4cb9fd)
+
+
+
+```css
+body {
+  background-color: var(--background-color); 
+  color: var(--foreground-color);                 
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease; 
+}
+```
+Por fim, a configuração geral do comportamento de body.
 
 No arquivo `src/styles/page.module.css`:
 
