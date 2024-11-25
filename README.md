@@ -21,6 +21,9 @@
   <div id="objetivo" >
 
   ## Objetivo
+   O objetivo desta prova de conceito é demonstrar a viabilidade de um sistema interativo de seleção de assentos para cinemas. A aplicação permite que os usuários visualizem os estados dos assentos (disponíveis, indisponíveis e selecionados), com destaque visual claro para cada estado. Além disso, o sistema atualiza dinamicamente o valor total dos ingressos com base na quantidade de assentos selecionados, oferecendo uma experiência prática e funcional.
+
+   Essa solução foi projetada para ser intuitiva e responsiva, simulando uma funcionalidade essencial para plataformas de venda de ingressos. Também serve como uma base sólida para expansões futuras, incluindo a integração com bancos de dados e sistemas de pagamento.
 
   </div>
 
